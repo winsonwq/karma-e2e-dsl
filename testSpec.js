@@ -21,9 +21,7 @@ describe('karma e2e dsl', function () {
   describe('#attr', function () {
     
     it('could get attribute value of element', dsl(function () {
-      input('input[name="textbox"]').attr('name', function (name) {
-        name.should.equal('textbox');
-      });
+      expect(input('input[name="textbox"]').attr('name')).toBe('textbox');
     }));
 
   });
@@ -133,17 +131,13 @@ describe('karma e2e dsl', function () {
 
     it('could be checked', dsl(function () {
       input(selector).check();
-      input(selector).isChecked(function (checked) {
-        checked.should.be.true;
-      });
+      expect(input(selector).isChecked()).toBeTruthy();
     }));
 
     it('could be unchecked', dsl(function () {
       input(selector).check();
       input(selector).uncheck();
-      input(selector).isChecked(function (checked) {
-        checked.should.be.false;
-      });
+      expect(input(selector).isChecked()).toBeFalsy();
     }));
 
   });
@@ -228,9 +222,8 @@ describe('karma e2e dsl', function () {
 
     it('could be set to the correct option as per assigned value', dsl(function () {
       dropdownlist(selector).options('1', '4');
-      dropdownlist(selector).options(function (values) {
-        values.should.eql(['1', '4']);
-      });
+      expect(dropdownlist(selector).options()).toContain('1');
+      expect(dropdownlist(selector).options()).toContain('4');
     }));
 
   });
@@ -271,9 +264,7 @@ describe('karma e2e dsl', function () {
 
     describe('#navigateTo', function () {
       it('could navigate to target path', dsl(function () {
-        browser.window.path(function (path) {
-          path.should.equal('/app/index.html');
-        });
+        expect(browser.window.path()).toMatch(/^\/app\/index.html$/);
       }));
     });
 

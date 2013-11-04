@@ -408,15 +408,77 @@
     });
   }
 
+  function _deepEqual(actual, expected) {
+    if (actual === expected) {
+      return true;
+
+    } else if (util.isBuffer(actual) && util.isBuffer(expected)) {
+      if (actual.length != expected.length) return false;
+
+      for (var i = 0; i < actual.length; i++) {
+        if (actual[i] !== expected[i]) return false;
+      }
+
+      return true;
+
+    } else if (util.isDate(actual) && util.isDate(expected)) {
+      return actual.getTime() === expected.getTime();
+    } else if (util.isRegExp(actual) && util.isRegExp(expected)) {
+      return actual.source === expected.source &&
+             actual.global === expected.global &&
+             actual.multiline === expected.multiline &&
+             actual.lastIndex === expected.lastIndex &&
+             actual.ignoreCase === expected.ignoreCase;
+    } else if (!util.isObject(actual) && !util.isObject(expected)) {
+      return actual == expected;
+    } else {
+      return objEquiv(actual, expected);
+    }
+  }
+
+  function addMatcher(matcherName, expected, fn) {
+    dslList.push(matcher(matcherName, expected, fn));
+    dslList.push(result());
+  }
+
+  function isString(obj) {
+    return ({}).toString.call(obj) === '[object String]';
+  }
+
+  function includes(actual, expected) {
+    if(isString(actual)) {
+      return str.indexOf(expected) >= 0;
+    }else if($.isArray(actual)) {
+      return $.inArray(expected, actual) >= 0;
+    }
+    return false;
+  }
+
   var expectPrototype = {
     constructor: expect,
     toEqual: function (expected) {
-
-      dslList.push(matcher('equal', expected, function(actual, expected) {
-        return actual === expected;
-      }));
-
-      dslList.push(result());
+      addMatcher('equal', expected, _deepEqual);
+    },
+    toBe: function (expected) {
+      addMatcher('be', expected, function(actual, expected) { return actual === expected });
+    },
+    toBeTruthy: function () {
+      this.toBe(true);
+    },
+    toBeFalsy: function () {
+      this.toBe(false);
+    },
+    toBeNull: function () {
+      this.toBe(null);
+    },
+    toBeDefined: function () {
+      addMatcher('defined', undefined, function(actual) { return "undefined" != typeof actual; });
+    },
+    toContain: function (expected) {
+      addMatcher('contain', expected, function(actual, expected) { return includes(actual, expected); });
+    },
+    toMatch: function (regex) {
+      addMatcher('match', regex, function(actual, expected) { return new RegExp(expected).test(actual); });
     },
     not: function () {
       dslList.push(not());
