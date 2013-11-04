@@ -34,6 +34,75 @@ describe('karma e2e dsl', function () {
 
   });
 
+  describe('#delay', function () {
+    
+    var selector = '[name="textbox"]';
+
+    it('could delay the dsl', dsl(function () {
+      browser.delay(function () {
+        input(selector).val(function (val) {
+          val.should.equal('hello world');
+        });  
+      }, 20);
+
+      browser.delay(function () {
+        input(selector).enter('hello world!');
+      }, 30);
+
+      browser.delay(function () {
+        input(selector).val(function (val) {
+          val.should.equal('hello world!');
+        });  
+      }, 40);
+
+      input(selector).enter('hello world');
+    }));
+
+
+    it('could delay the dsl in nested loop', dsl(function () {
+      browser.delay(function () {
+        input(selector).enter('hello world!');  
+
+        browser.delay(function () {
+          input(selector).enter('hello world!!');  
+        }, 10);
+
+      }, 20);
+
+      browser.delay(function () {
+        input(selector).val(function (val) {
+          val.should.equal('hello world!');
+        });  
+      }, 25);
+
+      browser.delay(function () {
+        input(selector).val(function (val) {
+          val.should.equal('hello world!!');
+        });  
+      }, 40);
+
+      input(selector).enter('hello world');
+
+    }));
+
+  });
+
+  describe('#sleep', function () {
+    
+    var selector = '[name="textbox"]';
+
+    it('could sleep for a while', dsl(function () {
+      browser.sleep(1000);
+      input(selector).enter('hello world!');
+      input(selector).val(function (val) {
+        val.should.equal('hello world!');
+      });
+    }));
+
+  });
+
+  
+
   describe('input[name="textbox"]', function () {
     
     var selector = '[name="textbox"]';

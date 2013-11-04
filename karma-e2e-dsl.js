@@ -3,6 +3,7 @@
 
   var ifr = $('#context');
   var dslList = [];
+  var delaycount = 0;
 
   function run(arr, idx) {
     var defer = $.Deferred();
@@ -58,11 +59,13 @@
   }
 
   function refreshDoneBlock(dsls, done) {
-    if(dsls.loadedDone) {
-      dsls.pop();
+    if(typeof(done) !== 'undefined') {
+      if(dsls.loadedDone) {
+        dsls.pop();
+      }
+      dsls.push(doneBlock(done));
+      dsls.loadedDone = true;
     }
-    dsls.push(doneBlock(done));
-    dsls.loadedDone = true;
     return dsls;
   }
 
@@ -70,7 +73,10 @@
     return function (done) {
       dslList = [];
       loadCases();
-      run(refreshDoneBlock(dslList, done));
+      refreshDoneBlock(dslList, done);
+      if(delaycount == 0) {
+        run(dslList);
+      }
     };
   }
 
@@ -113,12 +119,40 @@
     };
   }
 
+  function delay(callback, duration) {
+    delaycount ++;
+    setTimeout(function () {
+      var d = dslList.pop();
+      callback();
+      dslList.push(d);
+      if (--delaycount == 0) {
+        run(dslList);
+      }
+    }, duration);
+  }
+
+  function sleep(duration) {
+    return function() {
+      var defer = $.Deferred();
+      setTimeout(function () {
+        defer.resolve();
+      }, duration);
+      return defer.promise();
+    }
+  }
+
   var browser = {
     navigateTo: function (path) {
       dslList.push(navigateTo(path));
     },
     reload: function () {
       dslList.push(reload());
+    },
+    delay: function (callback, duration) {
+      delay(callback, duration);
+    },
+    sleep: function(duration) {
+      dslList.push(sleep(duration));
     },
     window: {
       path: function (pathHandler) {
