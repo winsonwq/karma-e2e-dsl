@@ -298,6 +298,8 @@
     }
   }
 
+  // element
+
   var prototype = {
     constructor: element,
     enter: function (value) {
@@ -354,9 +356,81 @@
 
   element.prototype = prototype;
 
+  // expect
+
+  function deferred(fn) {
+    return function () {
+      var defer = $.Deferred();
+      fn && fn.apply(this, [defer].concat([].slice.call(arguments)));
+      return defer.promise();
+    };
+  }
+
+  function expect(future) {
+    if (this === undefined) {
+      return new expect(future);
+    }
+
+    dslList.push(deferred(function (defer, arg) {
+      defer.resolve(arg, true);
+    }));
+  }
+
+  function not() {
+    return deferred(function (defer, actual, positiveOrNegative) {
+      defer.resolve(actual, !positiveOrNegative);
+    });
+  }
+
+  function matcher(matcherName, expected, fn) {
+    return deferred(function (defer, actual, positiveOrNegative) {
+      defer.resolve(matcherName, 
+        actual, 
+        expected, 
+        positiveOrNegative, 
+        positiveOrNegative === fn(actual, expected));
+    });
+  }
+
+  function result() {
+    return deferred(
+      function (defer, 
+        matcherName, 
+        actual, 
+        expected, 
+        positiveOrNegative, 
+        result) {
+
+      if(result === false) {
+        throw new Error('error');
+      }
+      defer.resolve();
+    });
+  }
+
+  var expectPrototype = {
+    constructor: expect,
+    toEqual: function (expected) {
+
+      dslList.push(matcher('equal', expected, function(actual, expected) {
+        return actual === expected;
+      }));
+
+      dslList.push(result());
+    },
+    not: function () {
+      dslList.push(not());
+      return this;
+    }
+  };
+
+  expect.prototype = expectPrototype;
+
   global.browser = browser;
   global.dsl = dsl;
   global.dropdownlist = global.input = global.element = element;
+
+  global.expect = expect;
 
 })(this, jQuery);
 

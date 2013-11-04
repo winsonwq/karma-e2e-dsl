@@ -13,9 +13,7 @@ describe('karma e2e dsl', function () {
     it('could resume the pause', dsl(function () {
       // browser.pause();
       input(selector).val('');
-      input(selector).val(function (val) {
-        val.should.equal('');
-      });
+      expect(input(selector).val()).toEqual('');
     }));
 
   });
