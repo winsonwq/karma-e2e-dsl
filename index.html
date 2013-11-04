@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf8"/>
+    <title>THIS IS INDEX</title>
+    <style type="text/css">
+      input[name="textbox"]{font-family: verdana}
+    </style>
+  </head>
+  <body>
+    <form action="#" method="post">
+      <fieldset>
+        <legend>Form Elements Test</legend>
+        <p>
+          <label>Input</label>
+          <input type="text" name="textbox"/>
+        </p>
+        <p>
+          <label>Checkbox</label>
+          <input type="checkbox" name="checkbox"/>
+        </p>
+        <p>
+          <label>Radio</label>
+          <label><input type="radio" name="radio" value="1"/> A</label>
+          <label><input type="radio" name="radio" value="2"/> B</label>
+        </p>
+        <p>
+          <label>Dropdown List</label>
+          <select name="dropdownlist">
+            <option value="1">value 1</option>
+            <option value="2">value 2</option>
+            <option value="3">value 3</option>
+            <option value="4">value 4</option>
+          </select>
+        </p>
+        <p>
+          <label>Multi-select Dropdown List</label>
+          <select name="multi-select-dropdownlist" multiple size="3">
+            <option value="1">value 1</option>
+            <option value="2">value 2</option>
+            <option value="3">value 3</option>
+            <option value="4">value 4</option>
+          </select>
+        </p>
+        <p>
+          <label>Button</label>
+          <input id="btn" type="button" name="button" value="Click Me !"/>
+          <input id="alert-btn" type="button" name="button" value="Click Me (alert dialog) !"/>
+          <input id="confirm-btn" type="button" name="button" value="Click Me (confirm dialog) !"/>
+          <input id="prompt-btn" type="button" name="button" value="Click Me (prompt dialog) !"/>
+        </p>
+
+        <p>
+          <label>Disabled Button</label>
+          <input id="disabled-btn" type="button" disabled name="button" value="Click Me !"/>
+        </p>
+        <p>
+          <a id="link" href="./demo.html">Go to demo</a>
+          <a id="link2" href="./demo.html">Another link.</a>
+        </p>
+      </fieldset>
+    </form>
+    <script type="text/javascript">
+      var button = document.getElementById('btn');
+      var alertBtn = document.getElementById('alert-btn');
+      var confirmBtn = document.getElementById('confirm-btn');
+      var promptBtn = document.getElementById('prompt-btn');
+
+      button.onclick = function () {
+        document.body.appendChild(document.createTextNode('button clicked!!'));
+      };
+
+      alertBtn.onclick = function () {
+        alert('button clicked!!!!');
+      };
+
+      confirmBtn.onclick = function () {
+        if(confirm('are you ok?')){
+          document.body.appendChild(document.createTextNode('I am ok!'));
+        }
+      };
+
+      promptBtn.onclick = function () {
+        var text = prompt('please enter your name.');
+        document.body.appendChild(document.createTextNode(text));
+      };
+    </script>
+  </body>
+</html>
