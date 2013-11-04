@@ -141,6 +141,7 @@
     }
   }
 
+  var pauseDefer = null;
   var browser = {
     navigateTo: function (path) {
       dslList.push(navigateTo(path));
@@ -153,6 +154,16 @@
     },
     sleep: function(duration) {
       dslList.push(sleep(duration));
+    },
+    pause: function () {
+      dslList.push(function () { 
+        pauseDefer = $.Deferred();
+        return pauseDefer.promise(); 
+      });
+    },
+    resume: function () {
+      pauseDefer.resolve();
+      pauseDefer = null;
     },
     window: {
       path: function (pathHandler) {

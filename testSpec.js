@@ -1,8 +1,24 @@
 describe('karma e2e dsl', function () {
-  
+
+  this.timeout(15000);
+
   beforeEach(dsl(function () {
     browser.navigateTo('/app/index.html');
   }));
+
+  describe('#pause and #resume', function () {
+    
+    var selector = '[name="textbox"]';
+
+    it('could resume the pause', dsl(function () {
+      // browser.pause();
+      input(selector).val('');
+      input(selector).val(function (val) {
+        val.should.equal('');
+      });
+    }));
+
+  });
 
   describe('#attr', function () {
     
@@ -92,7 +108,7 @@ describe('karma e2e dsl', function () {
     var selector = '[name="textbox"]';
 
     it('could sleep for a while', dsl(function () {
-      browser.sleep(1000);
+      browser.sleep(200);
       input(selector).enter('hello world!');
       input(selector).val(function (val) {
         val.should.equal('hello world!');
@@ -100,8 +116,6 @@ describe('karma e2e dsl', function () {
     }));
 
   });
-
-  
 
   describe('input[name="textbox"]', function () {
     
