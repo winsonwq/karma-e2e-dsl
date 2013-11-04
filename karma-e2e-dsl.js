@@ -46,6 +46,11 @@
       resolvedAbsolute = path.charAt(0) === '/';
     }
 
+    resolvedPath = resolvedPath.replace(/\/\//g, '/');
+    if(resolvedPath.charAt(resolvedPath.length - 1) === '/') {
+      resolvedPath = resolvedPath.substring(0, resolvedPath.length - 1);
+    }
+
     return resolvedPath;
   }
 
