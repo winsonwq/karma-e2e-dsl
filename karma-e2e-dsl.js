@@ -392,6 +392,57 @@
     });
   }
 
+  function format(val) {
+    if(isString(val)) {
+      return "'" + val + "'";
+    } else if($.isArray(val)) {
+      var str = '';
+      $(val).each(function (idx, item) {
+        str += format(item) + ', ';
+      });
+      str = str.substring(0, str.length - 2);
+      return "[" + str + "]";
+    }
+    return val;
+  }
+
+  function formatNot(positiveOrNegative) {
+    return positiveOrNegative ? '' : ' not';
+  }
+
+  function assertError(message) {
+    this.message = message;
+  }
+
+  function generateError(matcherName, actual, expected, positiveOrNegative) {
+    var error = 'AssertError: ';
+
+    switch(matcherName) {
+      case 'toEqual':
+        error += "expect " + format(actual) + formatNot(positiveOrNegative) + " to equal " + format(expected);
+        break;
+      case 'toBe':
+        error += "expect " + format(actual) + formatNot(positiveOrNegative) + " to be " + format(expected);
+        break;
+      case 'toBeDefined':
+        error += "expect " + format(actual) + formatNot(positiveOrNegative) + " to be defined."
+        break;
+      case 'toContain':
+        error += "expect " + format(actual) + formatNot(positiveOrNegative) + " to contain " + format(expected);
+        break;
+      case 'toMatch':
+        error += "expect " + format(actual) + formatNot(positiveOrNegative) + " to match " + format(expected);
+        break;
+      case 'toBeLessThan':
+        error += "expect " + format(actual) + formatNot(positiveOrNegative) + " to be less than " + format(expected);
+        break;
+      case 'toBeGreaterThan':
+        error += "expect " + format(actual) + formatNot(positiveOrNegative) + " to be greater than " + format(expected);
+        break;
+    }
+    return error;
+  }
+
   function result() {
     return deferred(
       function (defer, 
@@ -402,7 +453,7 @@
         result) {
 
       if(result === false) {
-        throw new Error('error');
+        throw new assertError(generateError(matcherName, actual, expected, positiveOrNegative));
       }
       defer.resolve();
     });
@@ -412,27 +463,28 @@
     if (actual === expected) {
       return true;
 
-    } else if (util.isBuffer(actual) && util.isBuffer(expected)) {
+    } else if ($.isArray(actual) && $.isArray(expected)) {
       if (actual.length != expected.length) return false;
 
       for (var i = 0; i < actual.length; i++) {
-        if (actual[i] !== expected[i]) return false;
+        if (!_deepEqual(actual[i], expected[i])) return false;
       }
 
       return true;
 
-    } else if (util.isDate(actual) && util.isDate(expected)) {
+    } else if (isDate(actual) && isDate(expected)) {
       return actual.getTime() === expected.getTime();
-    } else if (util.isRegExp(actual) && util.isRegExp(expected)) {
+    } else if (isRegExp(actual) && isRegExp(expected)) {
       return actual.source === expected.source &&
              actual.global === expected.global &&
              actual.multiline === expected.multiline &&
              actual.lastIndex === expected.lastIndex &&
              actual.ignoreCase === expected.ignoreCase;
-    } else if (!util.isObject(actual) && !util.isObject(expected)) {
+    } else if (!isObject(actual) && !isObject(expected)) {
       return actual == expected;
     } else {
-      return objEquiv(actual, expected);
+      // return objEquiv(actual, expected);
+      return false;
     }
   }
 
@@ -443,6 +495,18 @@
 
   function isString(obj) {
     return ({}).toString.call(obj) === '[object String]';
+  }
+
+  function isDate(obj) {
+    return ({}).toString.call(obj) === '[object Date]'; 
+  }
+
+  function isRegExp(obj) {
+    return ({}).toString.call(obj) === '[object RegExp]'; 
+  }
+
+  function isObject(obj) {
+    return ({}).toString.call(obj) === '[object Object]';  
   }
 
   function includes(actual, expected) {
@@ -481,10 +545,10 @@
       addMatcher('toMatch', regex, function(actual, expected) { return new RegExp(expected).test(actual); });
     },
     toBeLessThan: function (expected) {
-      addMatcher('toMatch', expected, function(actual, expected) { return actual < expected; });
+      addMatcher('toBeLessThan', expected, function(actual, expected) { return actual < expected; });
     },
     toBeGreaterThan: function (expected) {
-      addMatcher('toMatch', expected, function(actual, expected) { return actual > expected; });
+      addMatcher('toBeGreaterThan', expected, function(actual, expected) { return actual > expected; });
     },
     not: function () {
       dslList.push(not());
