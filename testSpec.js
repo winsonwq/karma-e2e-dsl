@@ -200,6 +200,17 @@ describe('karma e2e dsl', function () {
     }));
   });
 
+  describe('input[type="submit"]', function () {
+
+    it('should not be enabled', dsl(function() {
+      input('[type="submit"]').click();
+      browser.sleep(500);
+      browser.window.href(function (href) {
+        href.should.contain('dropdownlist=1');
+      });
+    }));
+  });
+
   describe('select[name="dropdownlist"]', function () {
     
     var selector = '[name="dropdownlist"]';
