@@ -457,10 +457,10 @@
   var expectPrototype = {
     constructor: expect,
     toEqual: function (expected) {
-      addMatcher('equal', expected, _deepEqual);
+      addMatcher('toEqual', expected, _deepEqual);
     },
     toBe: function (expected) {
-      addMatcher('be', expected, function(actual, expected) { return actual === expected });
+      addMatcher('toBe', expected, function(actual, expected) { return actual === expected });
     },
     toBeTruthy: function () {
       this.toBe(true);
@@ -472,13 +472,19 @@
       this.toBe(null);
     },
     toBeDefined: function () {
-      addMatcher('defined', undefined, function(actual) { return "undefined" != typeof actual; });
+      addMatcher('toBeDefined', undefined, function(actual) { return "undefined" != typeof actual; });
     },
     toContain: function (expected) {
-      addMatcher('contain', expected, function(actual, expected) { return includes(actual, expected); });
+      addMatcher('toContain', expected, function(actual, expected) { return includes(actual, expected); });
     },
     toMatch: function (regex) {
-      addMatcher('match', regex, function(actual, expected) { return new RegExp(expected).test(actual); });
+      addMatcher('toMatch', regex, function(actual, expected) { return new RegExp(expected).test(actual); });
+    },
+    toBeLessThan: function (expected) {
+      addMatcher('toMatch', expected, function(actual, expected) { return actual < expected; });
+    },
+    toBeGreaterThan: function (expected) {
+      addMatcher('toMatch', expected, function(actual, expected) { return actual > expected; });
     },
     not: function () {
       dslList.push(not());

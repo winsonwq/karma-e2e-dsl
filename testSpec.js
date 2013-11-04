@@ -245,6 +245,9 @@ describe('karma e2e dsl', function () {
       element('a').count(function (count) {
         count.should.equal(2);
       });
+
+      expect(element('a').count()).toBeLessThan(3);
+      expect(element('a').count()).toBeGreaterThan(1);
     }));
 
     describe('get elements inside', function () {
@@ -255,9 +258,7 @@ describe('karma e2e dsl', function () {
           selectedElements.eq(0).text().should.equal('Go to demo');
         });
       }));
-
     });
-
   });
 
   describe('#browser', function () {
