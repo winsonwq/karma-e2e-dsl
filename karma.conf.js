@@ -16,8 +16,7 @@ module.exports = function(config) {
     files: [
       './jquery.min.js',
       './should.js',
-      './init.js',
-      './karma-e2e-dsl.js',
+      './dist/karma-e2e-dsl.min.js',
       './testSpec.js',
     ],
 
@@ -28,7 +27,7 @@ module.exports = function(config) {
     ],
 
     proxies: {
-        '/app/': 'http://localhost:8000/'
+      '/app/': 'http://localhost:8000/'
     },
 
 

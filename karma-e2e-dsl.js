@@ -1,6 +1,8 @@
 (function (global, $, undefined) {
   'use strict'
 
+  document.write('<iframe id="context" width="100%" height="500px" src="about:blank"></iframe>');
+
   var ifr = $('#context');
   var dslList = [];
   var delaycount = 0;

@@ -1,1 +1,0 @@
-document.write('<iframe id="context" width="100%" height="500px" src="about:blank"></iframe>');

@@ -23,6 +23,7 @@
   "devDependencies": {
     "grunt-contrib-watch": "*",
     "grunt-contrib-connect": "*",
+    "grunt-contrib-uglify": "*",
     "karma-mocha": "*",
     "grunt-karma": "*",
     "grunt": "~0.4.1"
