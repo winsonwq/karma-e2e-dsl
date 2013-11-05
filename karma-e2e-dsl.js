@@ -513,7 +513,7 @@
 
   function includes(actual, expected) {
     if(isString(actual)) {
-      return str.indexOf(expected) >= 0;
+      return actual.indexOf(expected) >= 0;
     }else if($.isArray(actual)) {
       return $.inArray(expected, actual) >= 0;
     }
