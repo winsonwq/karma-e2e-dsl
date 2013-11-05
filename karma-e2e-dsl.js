@@ -412,10 +412,6 @@
     return positiveOrNegative ? '' : ' not';
   }
 
-  function assertError(message) {
-    this.message = message;
-  }
-
   function generateError(matcherName, actual, expected, positiveOrNegative) {
     var error = 'AssertError: ';
 
@@ -455,7 +451,7 @@
         result) {
 
       if(result === false) {
-        throw new assertError(generateError(matcherName, actual, expected, positiveOrNegative));
+        throw generateError(matcherName, actual, expected, positiveOrNegative);
       }
       defer.resolve();
     });
