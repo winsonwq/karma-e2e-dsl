@@ -1,6 +1,6 @@
 {
   "name": "karma-e2e-dsl",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "e2e dsl for com",
   "homepage": "https://github.com/winsonwq/karma-e2e-dsl",
   "repository": {

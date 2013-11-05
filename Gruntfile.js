@@ -4,6 +4,7 @@ module.exports = function(grunt) {
  
   // Project configuration.
   grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
     connect: {
       server: {
         options: {
@@ -25,6 +26,11 @@ module.exports = function(grunt) {
       }
     },
     uglify: {
+      options: {
+        report: 'min',
+        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+        '<%= grunt.template.today("yyyy-mm-dd") %> */'
+      },
       build: {
         files: {
           'dist/karma-e2e-dsl.min.js': ['./karma-e2e-dsl.js']
