@@ -97,7 +97,7 @@
 
   function navigateTo(path) {
     return deferred(function (defer) {
-      ifr.load(function () {
+      ifr.one('load', function () {
         defer.resolve();
       });
       ifr.attr('src', path);
