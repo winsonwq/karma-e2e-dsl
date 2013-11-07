@@ -96,34 +96,28 @@
   }
 
   function navigateTo(path) {
-    return function () {
-      var defer = $.Deferred();
+    return deferred(function (defer) {
       ifr.load(function () {
         defer.resolve();
       });
       ifr.attr('src', path);
-      return defer.promise();
-    };
+    });
   }
 
   function reload() {
-    return function () {
-      var defer = $.Deferred();
+    return deferred(function (defer) {
       ifr.one('load', function () {
         defer.resolve();
       });
       win().prop('location').reload();
-      return defer.promise();
-    };
+    });
   }
 
   function locationProp(propName, handler) {
-    return function () {
-      var defer = $.Deferred();
+    return deferred(function (defer) {
       defer.done(handler);
       defer.resolve(win().prop('location')[propName]);
-      return defer.promise();
-    };
+    });
   }
 
   function delay(callback, duration) {
@@ -139,13 +133,25 @@
   }
 
   function sleep(duration) {
-    return function() {
-      var defer = $.Deferred();
+    return deferred(function (defer) {
+      var args = argsPassingThrough(arguments);
       setTimeout(function () {
-        defer.resolve();
+        defer.resolve.apply(defer, args);
       }, duration);
-      return defer.promise();
-    }
+    });
+  }
+
+  function argsPassingThrough(_arguments) {
+    return [].slice.call(_arguments, 1);
+  }
+
+  function waitForPageLoad() {
+    return deferred(function (defer) {
+      var args = argsPassingThrough(arguments);
+      ifr.one('load', function () {
+        defer.resolve.apply(defer, args);
+      });
+    });
   }
 
   var pauseDefer = null;
@@ -171,6 +177,9 @@
     resume: function () {
       pauseDefer.resolve();
       pauseDefer = null;
+    },
+    waitForPageLoad: function () {
+      dslList.push(waitForPageLoad());
     },
     window: {
       path: function (pathHandler) {
@@ -260,28 +269,24 @@
   }
 
   function query(selectedElementsHandler) {
-    return function ($elems) {
-      var defer = $.Deferred();
+    return deferred(function (defer, $elems) {
       defer.then(selectedElementsHandler);
       defer.resolve($elems);
-      return defer.promise();
-    };
+    });
   }
 
   function select(value) {
     if(typeof(value) === 'undefined') {
       return prop('checked', true);
     } else {
-      return function ($elems) {
-        var defer = $.Deferred();
+      return deferred(function (defer, $elems) {
         $elems.each(function (idx, element) {
           if($(element).val() == value) {
             $(element).prop('checked', true);
           }
         });
         defer.resolve();
-        return defer.promise();
-      };
+      });
     }
   }
 

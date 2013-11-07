@@ -15,8 +15,8 @@ module.exports = function(grunt) {
     },
     watch: {
       test: {
-        files: ['./testSpec.js'],
-        tasks: ['connect', 'karma:e2e']
+        files: ['./testSpec.js', './karma-e2e-dsl.js'],
+        tasks: ['connect', 'uglify:build', 'karma:e2e']
       },
     },
     karma: {
