@@ -38,43 +38,79 @@ Go to the path which is relative to current path.
 
 #### browser.reload()
 
+Refreshes the currently loaded page in the test frame.
+
 #### browser.delay(callback, duration)
+
+Delay to execute the `callback` in `duration` milliseconds.
 
 #### browser.sleep(duration)
 
+Sleep for `duration` milliseconds.
+
 #### browser.pause()
+
+Pause the execution of running testcases.
 
 #### browser.resume()
 
+Resume the execution of running testcases.
+
 #### browser.waitForPageLoad()
+
+Manually set up waiting for page load.
 
 ### Window API
 
 #### browser.window.path()
 
+Returns the window.location.pathname of the currently loaded page in the test frame.
+
 #### browser.window.href()
+
+Returns the window.location.href of the currently loaded page in the test frame.
 
 #### browser.window.hash()
 
+Returns the window.location.hash (without #) of the currently loaded page in the test frame.
+
 #### browser.window.search()
+
+Returns the window.location.search of the currently loaded page in the test frame.
 
 ### Element API
 
 #### input(selector).enter(value)
 
+Enters the given `value` in the text field with the corresponding `selector`.
+
 #### input(selector).check()
+
+Check the checkbox with the corresponding `selector`.
 
 #### input(selector).uncheck()
 
+Unheck the checkbox with the corresponding `selector`.
+
 #### input(selector).select()
+
+Select the radio button with the corresponding `selector`.
 
 #### element(selector).click()
 
+Click the element with the corresponding `selector`.
+
 #### input(selector).isChecked()
+
+Return true if the checkbox is checked.
 
 #### input(selector).isSelected()
 
-#### input(selector).isDisabled()
+Return true if the radio button is selected.
+
+#### element(selector).isDisabled()
+
+Return true if the element is selected.
 
 #### dropdownlist(selector).option(value)
 
