@@ -206,10 +206,11 @@
   }
 
   function element(selector) {
-    if (this === undefined) {
+    if (this && this.constructor == element) {
+      dslList.push(findElement(selector));
+    } else {  
       return new element(selector);
     }
-    dslList.push(findElement(selector));
   }
 
   function construct(setValueHandler, getValueHandler, valueOrHandler) {
@@ -374,13 +375,13 @@
   }
 
   function expect(future) {
-    if (this === undefined) {
+    if(this && this.constructor == expect) {
+      dslList.push(deferred(function (defer, arg) {
+        defer.resolve(arg, true);
+      }));  
+    }else {
       return new expect(future);
     }
-
-    dslList.push(deferred(function (defer, arg) {
-      defer.resolve(arg, true);
-    }));
   }
 
   function not() {

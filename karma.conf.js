@@ -9,12 +9,14 @@ module.exports = function(config) {
 
 
     // frameworks to use
-    frameworks: ['karma-e2e-dsl', 'mocha'],
+    frameworks: ['mocha'],
 
 
     // list of files / patterns to load in the browser
     files: [
+      './jquery.min.js',
       './should.js',
+      './karma-e2e-dsl.js',
       './testSpec.js',
     ],
 
@@ -59,7 +61,7 @@ module.exports = function(config) {
     // - Safari (only Mac; has to be installed with `npm install karma-safari-launcher`)
     // - PhantomJS
     // - IE (only Windows; has to be installed with `npm install karma-ie-launcher`)
-    browsers: ['Chrome'],
+    browsers: ['Chrome', 'PhantomJS', 'Firefox'],
 
     urlRoot: '/__karma/',
 
