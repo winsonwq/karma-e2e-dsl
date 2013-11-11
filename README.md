@@ -4,18 +4,16 @@ As you know, karma testing runner couldn't run E2E testcases for web site which 
 
 ## How to use
 
-Choose `Mocha` as your testing framework, and download the `karma-e2e-dsl.min.js` under `dist` folder and add it into `karma.conf.js` before your testcases. (should add `jQuery` as well)
+Choose `Mocha` as your testing framework, and then set up `karma-e2e-dsl` in frameworks array as well. Remember to add `karma-e2e-dsl` to `package.json` file.
 
 ```js
 module.exports = function(config) {
   config.set({
     basePath: './',
-    frameworks: ['mocha'],
+    frameworks: ['mocha', 'karma-e2e-dsl'],
     // list of files / patterns to load in the browser
     files: [
-      './jquery.min.js',
       './should.js',
-      './karma-e2e-dsl.min.js',
       './testSpec.js',
     ],
     exclude: [

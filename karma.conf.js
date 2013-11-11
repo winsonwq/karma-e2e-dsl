@@ -9,14 +9,12 @@ module.exports = function(config) {
 
 
     // frameworks to use
-    frameworks: ['mocha'],
+    frameworks: ['karma-e2e-dsl', 'mocha'],
 
 
     // list of files / patterns to load in the browser
     files: [
-      './jquery.min.js',
       './should.js',
-      './dist/karma-e2e-dsl.min.js',
       './testSpec.js',
     ],
 
@@ -71,7 +69,7 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: false,
+    singleRun: false
   });
 };
 
