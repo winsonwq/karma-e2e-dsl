@@ -1,7 +1,7 @@
 {
   "name": "karma-e2e-dsl",
   "version": "0.1.0",
-  "description": "e2e dsl for com",
+  "description": "Karma e2e dsl for karma",
   "homepage": "https://github.com/winsonwq/karma-e2e-dsl",
   "repository": {
     "type": "git",
@@ -16,9 +16,12 @@
       "url": "https://github.com/windonwq/karma-e2e-dsl/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "karma.conf.js",
+  "keywords": [
+    "karma-plugin"
+  ],
+  "main": "./index.js",
   "scripts": {
-    "test": ""
+    "test": "grunt test"
   },
   "devDependencies": {
     "grunt-contrib-watch": "*",
@@ -26,6 +29,7 @@
     "grunt-contrib-uglify": "*",
     "karma-mocha": "*",
     "grunt-karma": "*",
+    "karma-e2e-dsl": "~0.1.0",
     "grunt": "~0.4.1"
   },
   "author": ""
