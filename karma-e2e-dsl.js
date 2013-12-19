@@ -1,4 +1,4 @@
-(function (global, $, undefined) {
+(function (global, $, underscore, undefined) {
   'use strict'
 
   document.write('<iframe id="context" width="100%" height="500px" src="about:blank"></iframe>');
@@ -464,32 +464,7 @@
   }
 
   function _deepEqual(actual, expected) {
-    if (actual === expected) {
-      return true;
-
-    } else if ($.isArray(actual) && $.isArray(expected)) {
-      if (actual.length != expected.length) return false;
-
-      for (var i = 0; i < actual.length; i++) {
-        if (!_deepEqual(actual[i], expected[i])) return false;
-      }
-
-      return true;
-
-    } else if (isDate(actual) && isDate(expected)) {
-      return actual.getTime() === expected.getTime();
-    } else if (isRegExp(actual) && isRegExp(expected)) {
-      return actual.source === expected.source &&
-             actual.global === expected.global &&
-             actual.multiline === expected.multiline &&
-             actual.lastIndex === expected.lastIndex &&
-             actual.ignoreCase === expected.ignoreCase;
-    } else if (!isObject(actual) && !isObject(expected)) {
-      return actual == expected;
-    } else {
-      // return objEquiv(actual, expected);
-      return false;
-    }
+    if(underscore) return underscore.isEqual(actual, expected);
   }
 
   function addMatcher(matcherName, expected, fn) {
@@ -568,5 +543,5 @@
 
   global.expect = expect;
 
-})(this, jQuery);
+})(this, jQuery, _);
 

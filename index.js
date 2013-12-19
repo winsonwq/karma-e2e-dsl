@@ -5,6 +5,7 @@ var createPattern = function(path) {
 var initDsl = function(files) {
   files.unshift(createPattern(__dirname + '/dist/karma-e2e-dsl.min.js'));
   files.unshift(createPattern(__dirname + '/jquery.min.js'));
+  files.unshift(createPattern(__dirname + '/underscore.min.js'));
 };
 
 initDsl.$inject = ['config.files'];

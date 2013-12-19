@@ -1,6 +1,6 @@
 {
   "name": "karma-e2e-dsl",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Karma e2e dsl for karma",
   "homepage": "https://github.com/winsonwq/karma-e2e-dsl",
   "repository": {
@@ -29,7 +29,6 @@
     "grunt-contrib-uglify": "*",
     "karma-mocha": "*",
     "grunt-karma": "*",
-    "karma-e2e-dsl": "~0.1.0",
     "grunt": "~0.4.1"
   },
   "author": ""
