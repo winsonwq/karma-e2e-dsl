@@ -18,8 +18,9 @@ module.exports = function(config) {
     ],
     exclude: [
     ],
+	urlRoot: '/karma/',
     proxies: {
-      '/app/': 'http://localhost:8000/'
+      '/': 'http://localhost:8000/'
     },
     /* the rest of configurations */
   });
