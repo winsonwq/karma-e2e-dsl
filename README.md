@@ -135,7 +135,7 @@ Executes the function fn(selectedElements), where selectedElements are the eleme
 
 #### element(selector).{method}()
 
-Returns the result of calling method on the element matching the given jQuery selector, where method can be any of the following jQuery methods: val, text, html, height, innerHeight, outerHeight, width, innerWidth, outerWidth, position, scrollLeft, scrollTop, offset.
+Returns the result of calling method on the element matching the given jQuery selector, where method can be 'count' or any of the following jQuery methods: val, text, html, height, innerHeight, outerHeight, width, innerWidth, outerWidth, position, scrollLeft, scrollTop, offset.
 
 #### element(selector).{method}(value)
 
