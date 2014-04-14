@@ -190,8 +190,9 @@ expect(value).toBeGreaterThan(expected)
 
 ## License
 
-> Copyright (c) 2013 Wang Qiu (winsonwq@gmail.com)
 > Copyright (c) 2014 Simon Descarpentries (siltaar/\d12s.fr)
+> 
+> Copyright (c) 2013 Wang Qiu (winsonwq@gmail.com)
 > 
 > Permission is hereby granted, free of charge, to any person
 > obtaining a copy of this software and associated documentation
