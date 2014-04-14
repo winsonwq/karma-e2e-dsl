@@ -127,7 +127,11 @@ Picks the options with the given values on the multi select with the given selec
 
 Return the selected values of options.
 
-Simple implementation of `input` and `dropdownlist`, both of two methods are `element`.
+#### form(selector).submit()
+
+Submit the form with the corresponding `selector'.
+
+`input`, `dropdownlist` and `form` are only aliases of `element`.
 
 #### element(selector).query(fn)
 
@@ -187,6 +191,7 @@ expect(value).toBeGreaterThan(expected)
 ## License
 
 > Copyright (c) 2013 Wang Qiu (winsonwq@gmail.com)
+> Copyright (c) 2014 Simon Descarpentries (siltaar/\d12s.fr)
 > 
 > Permission is hereby granted, free of charge, to any person
 > obtaining a copy of this software and associated documentation

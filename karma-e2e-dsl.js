@@ -325,6 +325,9 @@
     click: function () {
       dslList.push(eventBehavior('click'));
     },
+    submit: function () {
+      dslList.push(eventBehavior('submit'));
+    },
     isChecked: function (checkedHandler) {
       dslList.push(prop('checked', checkedHandler));
     },
@@ -429,7 +432,7 @@
         error += "expect " + format(actual) + formatNot(positiveOrNegative) + " to be " + format(expected);
         break;
       case 'toBeDefined':
-        error += "expect " + format(actual) + formatNot(positiveOrNegative) + " to be defined."
+        error += "expect " + format(actual) + formatNot(positiveOrNegative) + " to be defined.";
         break;
       case 'toContain':
         error += "expect " + format(actual) + formatNot(positiveOrNegative) + " to contain " + format(expected);
@@ -515,7 +518,7 @@
       this.toBe(null);
     },
     toBeDefined: function () {
-      addMatcher('toBeDefined', undefined, function(actual) { return "undefined" != typeof actual; });
+      addMatcher('toBeDefined', undefined, function(actual) { return 'undefined' != typeof actual; });
     },
     toContain: function (expected) {
       addMatcher('toContain', expected, function(actual, expected) { return includes(actual, expected); });
@@ -539,7 +542,7 @@
 
   global.browser = browser;
   global.dsl = dsl;
-  global.dropdownlist = global.input = global.element = element;
+  global.dropdownlist = global.input = global.element = global.form = element;
 
   global.expect = expect;
 
