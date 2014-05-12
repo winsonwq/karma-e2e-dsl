@@ -49,10 +49,10 @@
     }
 
     resolvedPath = resolvedPath.replace(/\/\//g, '/');
-    if(resolvedPath.charAt(resolvedPath.length - 1) === '/') {
+    var lastPath = arguments.length > 0 ? arguments[arguments.length - 1] : false;
+    if((!lastPath || lastPath.charAt(path.length - 1) !== '/') && resolvedPath.charAt(resolvedPath.length - 1) === '/') {
       resolvedPath = resolvedPath.substring(0, resolvedPath.length - 1);
     }
-
     return resolvedPath;
   }
 
@@ -169,9 +169,9 @@
       dslList.push(sleep(duration));
     },
     pause: function () {
-      dslList.push(function () { 
+      dslList.push(function () {
         pauseDefer = $.Deferred();
-        return pauseDefer.promise(); 
+        return pauseDefer.promise();
       });
     },
     resume: function () {
@@ -208,7 +208,7 @@
   function element(selector) {
     if (this && this.constructor == element) {
       dslList.push(findElement(selector));
-    } else {  
+    } else {
       return new element(selector);
     }
   }
@@ -355,8 +355,8 @@
     };
   });
 
-  $(['val', 'text', 'count#size', 'html', 
-    'height', 'innerHeight', 'outerHeight', 
+  $(['val', 'text', 'count#size', 'html',
+    'height', 'innerHeight', 'outerHeight',
     'width', 'innerWidth', 'outerWidth',
     'position', 'scrollLeft', 'scrollTop', 'offset']).each(function (idx, methodName) {
     var names = methodName.split('#');
@@ -381,7 +381,7 @@
     if(this && this.constructor == expect) {
       dslList.push(deferred(function (defer, arg) {
         defer.resolve(arg, true);
-      }));  
+      }));
     }else {
       return new expect(future);
     }
@@ -395,10 +395,10 @@
 
   function matcher(matcherName, expected, fn) {
     return deferred(function (defer, actual, positiveOrNegative) {
-      defer.resolve(matcherName, 
-        actual, 
-        expected, 
-        positiveOrNegative, 
+      defer.resolve(matcherName,
+        actual,
+        expected,
+        positiveOrNegative,
         positiveOrNegative === fn(actual, expected));
     });
   }
@@ -452,11 +452,11 @@
 
   function result() {
     return deferred(
-      function (defer, 
-        matcherName, 
-        actual, 
-        expected, 
-        positiveOrNegative, 
+      function (defer,
+        matcherName,
+        actual,
+        expected,
+        positiveOrNegative,
         result) {
 
       if(result === false) {
@@ -480,15 +480,15 @@
   }
 
   function isDate(obj) {
-    return ({}).toString.call(obj) === '[object Date]'; 
+    return ({}).toString.call(obj) === '[object Date]';
   }
 
   function isRegExp(obj) {
-    return ({}).toString.call(obj) === '[object RegExp]'; 
+    return ({}).toString.call(obj) === '[object RegExp]';
   }
 
   function isObject(obj) {
-    return ({}).toString.call(obj) === '[object Object]';  
+    return ({}).toString.call(obj) === '[object Object]';
   }
 
   function includes(actual, expected) {
@@ -547,4 +547,3 @@
   global.expect = expect;
 
 })(this, jQuery, _);
-
