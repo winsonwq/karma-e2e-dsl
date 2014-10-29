@@ -2,18 +2,18 @@
   "name": "karma-e2e-dsl",
   "version": "0.3.1",
   "description": "Karma e2e dsl for karma",
-  "homepage": "https://github.com/winsonwq/karma-e2e-dsl",
+  "homepage": "https://github.com/Siltaar/karma-e2e-dsl",
   "repository": {
     "type": "git",
-    "url": "git://github.com/winsonwq/karma-e2e-dsl.git"
+    "url": "git://github.com/Siltaar/karma-e2e-dsl.git"
   },
   "bugs": {
-    "url": "https://github.com/winsonwq/karma-e2e-dsl/issues"
+    "url": "https://github.com/Siltaar/karma-e2e-dsl/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/winsonwq/karma-e2e-dsl/blob/master/LICENSE-MIT"
+      "url": "https://github.com/Siltaar/karma-e2e-dsl/blob/master/LICENSE-MIT"
     }
   ],
   "keywords": [
