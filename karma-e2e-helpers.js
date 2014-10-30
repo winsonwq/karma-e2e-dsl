@@ -17,7 +17,7 @@ function test_page_loading (url, title) {
 		// here we are in Karma page
 		browser.navigateTo (url);
 		expect (element ('title').text ()).toMatch (new RegExp (title,'m'));
-		// The same test agin vaniller javascript
+		// same test again, vaniller javascript
 		element ('title').text (function (page_title) {
 			// here we got a value from the test iframe
 			// to display the tested value : console.log (page_title);
