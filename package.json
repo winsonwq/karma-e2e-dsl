@@ -24,12 +24,13 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "grunt-contrib-watch": "*",
+    "grunt": "~0.4.1",
     "grunt-contrib-connect": "*",
     "grunt-contrib-uglify": "*",
-    "karma-mocha": "*",
+    "grunt-contrib-watch": "*",
     "grunt-karma": "*",
-    "grunt": "~0.4.1"
+    "karma-mocha": "*",
+    "karma-phantomjs-launcher": "^0.1.4"
   },
   "author": ""
 }
