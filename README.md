@@ -1,19 +1,41 @@
 # karma-e2e-dsl
 
-As you know, karma testing runner couldn't run E2E testcases for web site which isn't based on AngularJS. If your site is using AngularJS, just ignore this project and choose `ng-scenario`.
+As you know, the karma test runner can't run E2E test cases for web apps which aren't based on AngularJS.
+If your site is using AngularJS, just ignore this project and choose `ng-scenario`.
+
+If however, you are looking to end-to-end test your web app and aren't using AngularJS, then this could be the solution for you!
+
+## Requirements
+
+* jQuery
+* Underscore
+
+## Assertions
+
+Jasmine style assertions are provided ([see Assertions below](#assertions)) in the ./expectations.js file. To use, simply
+include the expectations.js file in your karma config (see example config below). Example config and spec files are provided.
+
+To use either [chai](http://chaijs.com) (expect, assert or should), [expect.js](https://github.com/Automattic/expect.js) or [should.js](https://github.com/shouldjs/should.js), simply include them in your karma config (example config and spec files are provided).
+
+## Installation
+
+`npm install karma-e2e-dsl --save-dev`
 
 ## How to use
 
-Choose `Mocha` as your testing framework, and then set up `karma-e2e-dsl` in frameworks array as well. Remember to add `karma-e2e-dsl` to `package.json` file.
+Choose `Mocha` as your testing framework.
 
 ```js
 module.exports = function(config) {
   config.set({
     basePath: './',
-    frameworks: ['mocha', 'karma-e2e-dsl'],
+    frameworks: ['mocha'],
     // list of files / patterns to load in the browser
     files: [
-      './should.js',
+      './bower_components/jquery/dist/jquery.min.js',
+      './bower_components/underscore/underscore-min.js',
+      './expectations.js',
+      './karma-e2e-dsl.js',
       './test.spec.js',
     ],
     exclude: [
@@ -148,9 +170,9 @@ Returns the result of calling method passing in key on the element matching the 
 
 Executes the method passing in key and value on the element matching the given jQuery selector, where method can be any of the following jQuery methods: attr, prop, css.
 
-## Matchers
+## <a name="assertions"></a>Assertions
 
-Matchers are used in combination with the expect(...) function as described above and can be negated with not(). For instance: expect(element('h1').text()).not().toEqual('Error').
+Jasmine style assertions are used in combination with the expect(...) function as described above and can be negated with not(). For instance: expect(element('h1').text()).not().toEqual('Error').
 
 ```js
 // value and Object comparison following the rules of angular.equals().
