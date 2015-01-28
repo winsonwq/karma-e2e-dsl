@@ -7,9 +7,11 @@ module.exports = function(config) {
         files: [
             './bower_components/underscore/underscore-min.js',
             './bower_components/jquery/dist/jquery.min.js',
+            './bower_components/chai/chai.js',
+            //'./bower_components/expect/index.js',
             './expectations.js',
             './karma-e2e-dsl.js',
-            './test.spec.js'
+            './test-expect.spec.js'
         ]
     });
 };
