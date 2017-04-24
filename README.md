@@ -9,23 +9,32 @@ Choose `Mocha` as your testing framework, and then set up `karma-e2e-dsl` in fra
 ```js
 module.exports = function(config) {
   config.set({
-    basePath: './',
+	files: [{pattern: 'tests/**/*.js', included: true}],
+	browsers: 'Firefox', 'Chrome', 'PhantomJS', …
     frameworks: ['mocha', 'karma-e2e-dsl'],
     // list of files / patterns to load in the browser
     files: [
       './should.js',
       './testSpec.js',
     ],
-    exclude: [
-    ],
+    exclude: [],
 	urlRoot: '/karma/',
-    proxies: {
-      '/': 'http://localhost:8000/'
-    },
-    /* the rest of configurations */
+    proxies: { '/': 'http://localhost:8000/'},
+    /* the rest of configurations, for instance */
+    client: {mocha: { ui: 'tdd' }},
+    port: 9876,
+    reporters: ['progress'],
+    colors: true,
+    logLevel: config.LOG_INFO,
+    captureTimeout: 20000,
+    browserNoActivityTimeout: 300000,
+    autoWatch: false,
+    singleRun: true,
   });
 };
 ```
+
+A presentation have been given at the OpenWorldForum 2014, Paris. You can watch the video again here : http://www.acoeuro.com/test-e2e.html
 
 ## API
 
