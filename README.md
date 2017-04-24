@@ -31,98 +31,59 @@ module.exports = function(config) {
 
 ### High level test API
 
-`test_page_loading(url, title)` tests if the given URL loads a page with the given `title` in the captured browsers.
-
-`test_match(selector, regexp)` tests if the selected DOM element .text() value match the given `regexp`.
-
-`test_val(selector, text)` tests if the selected DOM element has a given value : .val()
-
-`test_exist(selector)` tests if the selected DOM element exists.
-
-`test_text(selector, text, visible)` tests if the selected DOM element has the given text : .text() ; if `visible` is true, the test asserts that the text is visible.
-
-`test_count(selector, count)` tests selector occurences.
-
-`test_fill_field(selector, value_array)` fills the selected input form field. `value_array` should contain `selector` as one of its keys. The set value will be this one.
-
-`test_click(selector, wait, visible)` clicks on the selected DOM element. If `wait` is true the test waits for a page to load in the browser after the click. If `visible` is true the test asserts that the element is visible.
-
-`test_submit(selector)` submits the selected form.
-
-`test_reload` reloads the page.
-
-`test_fail` test that always fails, usefull to stop a test suite and start debugging.
-
-`test_pause` have the browser waiting while you inspect what's going on.
-
-`test_resume` start back the testsuite.
-
-`elt(selector, visible)` ensure the given element exists and, if `visible` is true, is visible.
+- `test_page_loading(url, title)` tests if the given URL loads a page with the given `title` in the captured browsers.
+- `test_match(selector, regexp)` tests if the selected DOM element .text() value match the given `regexp`.
+- `test_val(selector, text)` tests if the selected DOM element has a given value : .val()
+- `test_exist(selector)` tests if the selected DOM element exists.
+- `test_text(selector, text, visible)` tests if the selected DOM element has the given text : .text() ; if `visible` is true, the test asserts that the text is visible.
+- `test_count(selector, count)` tests selector occurences.
+- `test_fill_field(selector, value_array)` fills the selected input form field. `value_array` should contain `selector` as one of its keys. The set value will be this one.
+- `test_click(selector, wait, visible)` clicks on the selected DOM element. If `wait` is true the test waits for a page to load in the browser after the click. If `visible` is true the test asserts that the element is visible.
+- `test_submit(selector)` submits the selected form.
+- `test_reload` reloads the page.
+- `test_fail` test that always fails, usefull to stop a test suite and start debugging.
+- `test_pause` have the browser waiting while you inspect what's going on.
+- `test_resume` start back the testsuite.
+- `elt(selector, visible)` ensure the given element exists and, if `visible` is true, is visible.
 
 ### Browser API
 
-`browser.navigateTo(path)` go to the path which is relative to current path.
-
-`browser.reload()` refreshes the currently loaded page in the test frame.
-
-`browser.delay(callback, duration)` delay to execute the `callback` in `duration` milliseconds.
-
-`browser.sleep(duration)` sleep for `duration` milliseconds.
-
-`browser.pause()` pause the execution of running testcases.
-
-`browser.resume()` resume the execution of running testcases.
-
-`browser.waitForPageLoad()` manually set up waiting for page load.
+- `browser.navigateTo(path)` go to the path which is relative to current path.
+- `browser.reload()` refreshes the currently loaded page in the test frame.
+- `browser.delay(callback, duration)` delay to execute the `callback` in `duration` milliseconds.
+- `browser.sleep(duration)` sleep for `duration` milliseconds.
+- `browser.pause()` pause the execution of running testcases.
+- `browser.resume()` resume the execution of running testcases.
+- `browser.waitForPageLoad()` manually set up waiting for page load.
 
 ### Window API
 
-`browser.window.path()` returns the window.location.pathname of the currently loaded page in the test frame.
-
-`browser.window.href()` returns the window.location.href of the currently loaded page in the test frame.
-
-`browser.window.hash()` returns the window.location.hash (without #) of the currently loaded page in the test frame.
-
-`browser.window.search()` returns the window.location.search of the currently loaded page in the test frame.
+- `browser.window.path()` returns the window.location.pathname of the currently loaded page in the test frame.
+- `browser.window.href()` returns the window.location.href of the currently loaded page in the test frame.
+- `browser.window.hash()` returns the window.location.hash (without #) of the currently loaded page in the test frame.
+- `browser.window.search()` returns the window.location.search of the currently loaded page in the test frame.
 
 ### Element API
 
-`input(selector).enter(value)` enters the given `value` in the text field with the corresponding `selector`.`
-
-`input(selector).check()` check the checkbox with the corresponding `selector`.`
-
-`input(selector).uncheck()` unheck the checkbox with the corresponding `selector`.`
-
-`input(selector).select()` select the radio button with the corresponding `selector`.`
-
-`element(selector).click()` click the element with the corresponding `selector`.`
-
-`input(selector).isChecked()` return true if the checkbox is checked.
-
-`input(selector).isSelected()` return true if the radio button is selected.
-
-`element(selector).isDisabled()` return true if the element is selected.
-
-`dropdownlist(selector).option(value)` picks the option with the given value on the select with the given selector.
-
-`dropdownlist(selector).option()` return the selected value of option.
-
-`dropdownlist(selector).options(val1/*, val2 ...*/)` picks the options with the given values on the multi select with the given selector.
-
-`dropdownlist(selector).options()` return the selected values of options.
-
-`form(selector).submit()` submit the form with the corresponding `selector'.`
+- `input(selector).enter(value)` enters the given `value` in the text field with the corresponding `selector`.`
+- `input(selector).check()` check the checkbox with the corresponding `selector`.`
+- `input(selector).uncheck()` unheck the checkbox with the corresponding `selector`.`
+- `input(selector).select()` select the radio button with the corresponding `selector`.`
+- `element(selector).click()` click the element with the corresponding `selector`.`
+- `input(selector).isChecked()` return true if the checkbox is checked.
+- `input(selector).isSelected()` return true if the radio button is selected.
+- `element(selector).isDisabled()` return true if the element is selected.
+- `dropdownlist(selector).option(value)` picks the option with the given value on the select with the given selector.
+- `dropdownlist(selector).option()` return the selected value of option.
+- `dropdownlist(selector).options(val1/*, val2 ...*/)` picks the options with the given values on the multi select with the given selector.
+- `dropdownlist(selector).options()` return the selected values of options.
+- `form(selector).submit()` submit the form with the corresponding `selector'.`
 `input`, `dropdownlist` and `form` are only aliases of `element`.
-
-`element(selector).query(fn)` executes the function fn(selectedElements), where selectedElements are the elements that match the given jQuery selector and done is a function that is called at the end of the fn function.
-
-`element(selector).{method}()` returns the result of calling method on the element matching the given jQuery selector, where method can be 'count' or any of the following jQuery methods: val, text, html, height, innerHeight, outerHeight, width, innerWidth, outerWidth, position, scrollLeft, scrollTop, offset.
-
-`element(selector).{method}(value)` executes the method passing in value on the element matching the given jQuery selector, where method can be any of the following jQuery methods: val, text, html, height, innerHeight, outerHeight, width, innerWidth, outerWidth, position, scrollLeft, scrollTop, offset.
-
-`element(selector).{method}(key)` returns the result of calling method passing in key on the element matching the given jQuery selector, where method can be any of the following jQuery methods: attr, prop, css.
-
-`element(selector).{method}(key, value)` executes the method passing in key and value on the element matching the given jQuery selector, where method can be any of the following jQuery methods: attr, prop, css.
+- `element(selector).query(fn)` executes the function fn(selectedElements), where selectedElements are the elements that match the given jQuery selector and done is a function that is called at the end of the fn function.
+- `element(selector).{method}()` returns the result of calling method on the element matching the given jQuery selector, where method can be 'count' or any of the following jQuery methods: val, text, html, height, innerHeight, outerHeight, width, innerWidth, outerWidth, position, scrollLeft, scrollTop, offset.
+- `element(selector).{method}(value)` executes the method passing in value on the element matching the given jQuery selector, where method can be any of the following jQuery methods: val, text, html, height, innerHeight, outerHeight, width, innerWidth, outerWidth, position, scrollLeft, scrollTop, offset.
+- `element(selector).{method}(key)` returns the result of calling method passing in key on the element matching the given jQuery selector, where method can be any of the following jQuery methods: attr, prop, css.
+- `element(selector).{method}(key, value)` executes the method passing in key and value on the element matching the given jQuery selector, where method can be any of the following jQuery methods: attr, prop, css.
 
 ### Matchers
 
