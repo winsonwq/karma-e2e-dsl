@@ -1,6 +1,8 @@
 # karma-e2e-dsl, an end-to-end web testing API
 
-As you know, karma testing runner couldn't run E2E testcases for web site which isn't based on AngularJS. If your site is using AngularJS, just ignore this project and choose `ng-scenario`.
+Multipurpose end-to-end Javascript testing library, based on previous work around Karma and AngularJS.
+
+This librabry appeared because karma testing runner couldn't run E2E testcases for any web sites, but was restricted to those based on AngularJS.
 
 ## How to use
 
